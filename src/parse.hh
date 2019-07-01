@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.0.2.  */
+/* A Bison parser, made by GNU Bison 3.0.4.  */
 
 /* Bison interface for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2013 Free Software Foundation, Inc.
+   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -30,8 +30,8 @@
    This special exception was added by the Free Software Foundation in
    version 2.2 of Bison.  */
 
-#ifndef YY_YY_SRC_PARSE_HH_INCLUDED
-# define YY_YY_SRC_PARSE_HH_INCLUDED
+#ifndef YY_YY_PARSE_HH_INCLUDED
+# define YY_YY_PARSE_HH_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -54,26 +54,20 @@ extern int yydebug;
     TOK_QSTR = 264
   };
 #endif
-/* Tokens.  */
-#define TOK_LBRACKET 258
-#define TOK_RBRACKET 259
-#define TOK_COMMA 260
-#define TOK_LBRACE 261
-#define TOK_RBRACE 262
-#define TOK_STR 263
-#define TOK_QSTR 264
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef union YYSTYPE YYSTYPE;
+
 union YYSTYPE
 {
-#line 73 "src/parse.y" /* yacc.c:1909  */
+#line 73 "parse.y" /* yacc.c:1909  */
 
    char s[128];
 
-#line 76 "src/parse.hh" /* yacc.c:1909  */
+#line 68 "parse.hh" /* yacc.c:1909  */
 };
+
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif
@@ -83,4 +77,4 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-#endif /* !YY_YY_SRC_PARSE_HH_INCLUDED  */
+#endif /* !YY_YY_PARSE_HH_INCLUDED  */

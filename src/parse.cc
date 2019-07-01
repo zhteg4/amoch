@@ -1,8 +1,8 @@
-/* A Bison parser, made by GNU Bison 3.0.2.  */
+/* A Bison parser, made by GNU Bison 3.0.4.  */
 
 /* Bison implementation for Yacc-like parsers in C
 
-   Copyright (C) 1984, 1989-1990, 2000-2013 Free Software Foundation, Inc.
+   Copyright (C) 1984, 1989-1990, 2000-2015 Free Software Foundation, Inc.
 
    This program is free software: you can redistribute it and/or modify
    it under the terms of the GNU General Public License as published by
@@ -44,7 +44,7 @@
 #define YYBISON 1
 
 /* Bison version.  */
-#define YYBISON_VERSION "3.0.2"
+#define YYBISON_VERSION "3.0.4"
 
 /* Skeleton name.  */
 #define YYSKELETON_NAME "yacc.c"
@@ -62,7 +62,7 @@
 
 
 /* Copy the first part of user declarations.  */
-#line 1 "src/parse.y" /* yacc.c:339  */
+#line 1 "parse.y" /* yacc.c:339  */
 
 // ============================================================================
 //
@@ -134,7 +134,7 @@ parse_input(Param *proot,
    return ret;
 }
 
-#line 138 "src/parse.cc" /* yacc.c:339  */
+#line 138 "parse.cc" /* yacc.c:339  */
 
 # ifndef YY_NULLPTR
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -154,8 +154,8 @@ parse_input(Param *proot,
 
 /* In a future release of Bison, this section will be replaced
    by #include "parse.hh".  */
-#ifndef YY_YY_SRC_PARSE_HH_INCLUDED
-# define YY_YY_SRC_PARSE_HH_INCLUDED
+#ifndef YY_YY_PARSE_HH_INCLUDED
+# define YY_YY_PARSE_HH_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -178,26 +178,20 @@ extern int yydebug;
     TOK_QSTR = 264
   };
 #endif
-/* Tokens.  */
-#define TOK_LBRACKET 258
-#define TOK_RBRACKET 259
-#define TOK_COMMA 260
-#define TOK_LBRACE 261
-#define TOK_RBRACE 262
-#define TOK_STR 263
-#define TOK_QSTR 264
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef union YYSTYPE YYSTYPE;
+
 union YYSTYPE
 {
-#line 73 "src/parse.y" /* yacc.c:355  */
+#line 73 "parse.y" /* yacc.c:355  */
 
    char s[128];
 
-#line 200 "src/parse.cc" /* yacc.c:355  */
+#line 192 "parse.cc" /* yacc.c:355  */
 };
+
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif
@@ -207,11 +201,11 @@ extern YYSTYPE yylval;
 
 int yyparse (void);
 
-#endif /* !YY_YY_SRC_PARSE_HH_INCLUDED  */
+#endif /* !YY_YY_PARSE_HH_INCLUDED  */
 
 /* Copy the second part of user declarations.  */
 
-#line 215 "src/parse.cc" /* yacc.c:358  */
+#line 209 "parse.cc" /* yacc.c:358  */
 
 #ifdef short
 # undef short
@@ -1285,30 +1279,30 @@ yyreduce:
   switch (yyn)
     {
         case 7:
-#line 93 "src/parse.y" /* yacc.c:1646  */
+#line 93 "parse.y" /* yacc.c:1646  */
     {pval.push_back((yyvsp[0].s));}
-#line 1291 "src/parse.cc" /* yacc.c:1646  */
+#line 1285 "parse.cc" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 94 "src/parse.y" /* yacc.c:1646  */
+#line 94 "parse.y" /* yacc.c:1646  */
     {pval.push_back((yyvsp[0].s));}
-#line 1297 "src/parse.cc" /* yacc.c:1646  */
+#line 1291 "parse.cc" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 102 "src/parse.y" /* yacc.c:1646  */
+#line 102 "parse.y" /* yacc.c:1646  */
     {
       Param *p = new Param((yyvsp[-1].s));
 
       parser.add_value(p, (yyvsp[0].s));
       parser.add_sub(p);
    }
-#line 1308 "src/parse.cc" /* yacc.c:1646  */
+#line 1302 "parse.cc" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 109 "src/parse.y" /* yacc.c:1646  */
+#line 109 "parse.y" /* yacc.c:1646  */
     {
       Param *p = new Param((yyvsp[-1].s));
 
@@ -1318,11 +1312,11 @@ yyreduce:
       parser.add_value(p, qstr);
       parser.add_sub(p);
    }
-#line 1322 "src/parse.cc" /* yacc.c:1646  */
+#line 1316 "parse.cc" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 119 "src/parse.y" /* yacc.c:1646  */
+#line 119 "parse.y" /* yacc.c:1646  */
     {
       Param *p = new Param((yyvsp[-1].s));
 
@@ -1330,22 +1324,22 @@ yyreduce:
       pval.clear();
       parser.add_sub(p);
    }
-#line 1334 "src/parse.cc" /* yacc.c:1646  */
+#line 1328 "parse.cc" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 129 "src/parse.y" /* yacc.c:1646  */
+#line 129 "parse.y" /* yacc.c:1646  */
     {
       Param *p = new Param((yyvsp[-2].s));
       
       parser.add_value(p, (yyvsp[-1].s));
       parser.push(p);
    }
-#line 1345 "src/parse.cc" /* yacc.c:1646  */
+#line 1339 "parse.cc" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 138 "src/parse.y" /* yacc.c:1646  */
+#line 138 "parse.y" /* yacc.c:1646  */
     {
       if (parser.stack_key() == NULL) {
          yyerror("mismatched braces");
@@ -1354,11 +1348,11 @@ yyreduce:
       else
          parser.add_sub(parser.pop());
    }
-#line 1358 "src/parse.cc" /* yacc.c:1646  */
+#line 1352 "parse.cc" /* yacc.c:1646  */
     break;
 
 
-#line 1362 "src/parse.cc" /* yacc.c:1646  */
+#line 1356 "parse.cc" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1586,5 +1580,5 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 147 "src/parse.y" /* yacc.c:1906  */
+#line 147 "parse.y" /* yacc.c:1906  */
 
