@@ -1,0 +1,30 @@
+#!/bin/sh
+#
+# Wrap an executable with a script that loads the necessary
+# environment for dynamically linking against local OpenBabel
+
+if [ $# != "2" ]; then
+   echo "${0} program babeldir"
+   exit
+fi
+EXE=${1}
+DIR=${2}
+if [ ! -f ${EXE} ]; then
+   echo "${EXE} not found"
+   exit
+fi
+
+EXEFULL=`readlink -f ${EXE}`
+EXEDIR=`dirname ${EXEFULL}`
+EXENAME=`basename ${EXEFULL}`
+LOCALEXE=${EXENAME}-local
+mv ${EXE} ${EXEDIR}/${LOCALEXE}
+
+cat >${EXE}<<EOF
+#!/bin/sh
+export LD_LIBRARY_PATH="${DIR}/lib:\${LD_LIBRARY_PATH}"
+export BABEL_LIBDIR=${DIR}/lib
+export BABEL_DATADIR=${DIR}/data
+${EXEDIR}/${LOCALEXE} \$*
+EOF
+chmod +x ${EXE}

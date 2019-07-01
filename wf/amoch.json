@@ -1,0 +1,77 @@
+{
+    "task": {
+        "name": "AMOCH",
+        "command": "/home/ben/software/projects/amoch/amoch amoch.in",
+        "echo_output": true,
+        "templates": {
+            "amoch.in": "amoch_in"
+        },
+        "inputs": {
+            "rng_dat": {
+                "type": "uri",
+                "value": "file://WORKDIR/rng.dat",
+                "label": "RNG state file for restart",
+                "units": "",
+                "tags": []
+            },
+            "polymer_dump": {
+                "type": "uri",
+                "value": "file://WORKDIR/polymer.dump",
+                "label": "LAMMPS dump file for restart: atomic positions",
+                "units": "",
+                "tags": []
+            },
+            "bonds_dat": {
+                "type": "uri",
+                "value": "file://WORKDIR/bonds.dat",
+                "label": "Bonds file for restart",
+                "units": "",
+                "tags": []
+            },
+            "builder_dat": {
+                "type": "uri",
+                "value": "file://WORKDIR/builder.dat",
+                "label": "Builder state file for restart: internal state",
+                "units": "",
+                "tags": []
+            }
+        },
+        "outputs": {
+            "atoms_dat": {
+                "type": "uri",
+                "value": "file://WORKDIR/atoms.dat",
+                "label": "Atomic positions for input to data4Lammps",
+                "units": "",
+                "tags": []
+            },
+            "atom_type_dat_in": {
+                "type": "uri",
+                "value": "file://WORKDIR/atom_type.dat.in",
+                "label": "Atomic species for input to typer",
+                "units": "",
+                "tags": []
+            },
+            "bonds_dat": {
+                "type": "uri",
+                "value": "file://WORKDIR/bonds.dat",
+                "label": "Bond list for input to data4Lammps",
+                "units": "",
+                "tags": []
+            },
+            "bond_type_dat_in": {
+                "type": "uri",
+                "value": "file://WORKDIR/bond_type.dat.in",
+                "label": "Bond type list for input to typer",
+                "units": "",
+                "tags": []
+            },
+            "cell_file": {
+                "type": "uri",
+                "value": "file://WORKDIR/amoch_cell",
+                "label": "File with length of cell edge for data4Lammps",
+                "units": "",
+                "tags": []
+            }
+        }
+    }
+}

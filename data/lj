@@ -1,0 +1,16 @@
+
+energy LJ {
+   params C {
+      epsilon 0.0951
+      sigma 3.47
+   }
+   params H {
+      epsilon 0.0152
+      sigma 2.85
+   }
+   params O {
+      epsilon 0.0957
+      sigma 3.03
+   }
+}
+

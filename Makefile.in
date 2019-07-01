@@ -1,0 +1,132 @@
+#
+# @configure_input@
+
+NAME            = @PACKAGE_NAME@
+VERSION         = @PACKAGE_VERSION@
+CXX             = @CXX@
+CXXFLAGS        = @CXXFLAGS@ -pedantic -W -Wall -Werror #-g -O2 
+OBJEXT          = @OBJEXT@
+LDFLAGS         = @LDFLAGS@
+EXEEXT          = @EXEEXT@
+LIBS            = @LIBS@
+BABEL_TARGET    = @BABEL_TARGET@
+LOCAL_EXT       = @LOCAL_EXT@
+LOCAL_DIR       = @LOCAL_DIR@
+LEX             = @LEX@
+YACC            = @YACC@
+
+VERSION_H       = src/version.h
+HEADERS         = src/builder.h \
+                  src/cbmc.h \
+                  src/cell.h \
+                  src/chain.h \
+                  src/chaintype.h \
+                  src/config.h \
+                  src/defs.h \
+                  src/energy.h \
+                  src/exclusion.h \
+                  src/fene.h \
+                  src/ivec.h \
+                  src/lj.h \
+                  src/logfile.h \
+                  src/monomer.h \
+                  src/os.h \
+                  src/output.h \
+                  src/param.h \
+                  src/restart.h \
+                  src/rng.h \
+                  src/slab.h \
+                  src/system.h \
+                  src/timer.h \
+                  src/triple.h \
+                  src/types.h \
+                  $(VERSION_H)
+SOURCES         = src/cbmc.cc \
+                  src/cell.cc \
+                  src/chain.cc \
+                  src/chaintype.cc \
+                  src/fene.cc \
+                  src/lex.cc \
+                  src/lj.cc \
+                  src/logfile.cc \
+                  src/monomer.cc \
+                  src/os.cc \
+                  src/output.cc \
+                  src/parse.cc \
+                  src/param.cc \
+                  src/restart.cc \
+                  src/rng.cc \
+                  src/slab.cc \
+                  src/system.cc \
+                  src/triple.cc \
+                  src/types.cc
+SFMT_O          = obj/SFMT.$(OBJEXT)
+OBJECTS         = $(SOURCES:src/%.cc=obj/%.$(OBJEXT)) $(SFMT_O)
+MAIN_O          = obj/main.$(OBJEXT)
+EXE_OBJECTS     = $(OBJECTS) $(MAIN_O)
+EXE             = $(NAME)$(EXEEXT)
+TEST_O          = obj/tests.$(OBJEXT)
+TEST_OBJECTS    = $(OBJECTS) $(TEST_O)
+TEST_EXE        = testexe$(EXEEXT)
+
+CXX_CMD         = $(CXX) $(CXXFLAGS) -Isrc -Ilib
+LD_CMD          = $(CXX) $(LDFLAGS) $(LIBS)
+
+all: $(BABEL_TARGET) $(EXE)$(LOCAL_EXT)
+
+$(VERSION_H): 
+	@echo "#define PROG_NAME     \"$(NAME)\""     > $@
+	@echo "#define PROG_VERSION  \"$(VERSION)\"" >> $@
+	@echo "#define PROG_CXX_CMD  \"$(CXX_CMD)\"" >> $@
+	@echo "#define PROG_LD_CMD   \"$(LD_CMD)\""  >> $@
+
+src/lex.cc: src/lex.l src/parse.cc
+	$(LEX) -o $@ $<
+
+src/parse.cc: src/parse.y
+	$(YACC) -d -o $@ $<
+
+obj/%.$(OBJEXT): src/%.cc
+	$(CXX_CMD) -c -o $@ $<
+
+$(SFMT_O): lib/SFMT/SFMT.c
+	$(CXX_CMD) -c -o $@ $<
+
+libbabel: 
+	@(cd lib; ./build_babel)
+
+$(EXE): $(VERSION_H) $(HEADERS) $(EXE_OBJECTS)
+	$(CXX) -o $@ $(LDFLAGS) $(EXE_OBJECTS) $(LIBS)
+
+$(EXE)-local: $(EXE)
+	@./localize $(EXE) $(LOCAL_DIR)
+
+$(TEST_O): tests/tests.cc
+	$(CXX_CMD) -c -o $@ $<
+
+$(TEST_EXE): $(HEADERS) $(TEST_OBJECTS)
+	$(CXX) -o $@ $(LDFLAGS) $(TEST_OBJECTS) $(LIBS)
+
+$(TEST_EXE)-local: $(TEST_EXE)
+	@./localize $(TEST_EXE) $(LOCAL_DIR)
+
+test: 
+	@(if [ -f $(TEST_EXE) ]; then rm $(TEST_EXE); fi)
+	@make $(TEST_EXE)$(LOCAL_EXT)
+	@./$(TEST_EXE)
+	@-rm $(TEST_EXE)* testfile* 
+
+check: test
+
+clean:
+	@-rm obj/*
+	@-(for f in $(VERSION_H) $(EXE)* $(TEST_EXE)* ; do \
+         if [ -f $$f ]; then rm $$f; fi \
+      done)
+
+parseclean:
+	@-rm src/lex.cc src/parse.hh src/parse.cc
+
+distclean: clean
+	@-rm config.log config.status Makefile src/config.h 
+

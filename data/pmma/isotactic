@@ -1,0 +1,12 @@
+
+monomer pmma1 {
+   file pmma/pmma1.pdb
+   head 1
+   tail 4
+}
+
+chain_type isotactic {
+   monomers [pmma1]  # repeats
+   weight 1.0
+}
+

@@ -1,0 +1,18 @@
+
+monomer pmma1 {
+   file pmma/pmma1.pdb
+   head 1
+   tail 4
+}
+monomer pmma2 {
+   file pmma/pmma2.pdb
+   head 1
+   tail 4
+}
+
+chain_type atactic {
+   monomers [pmma1, pmma2]
+   monomer_weights [0.5, 0.5]
+   weight 1.0
+}
+

@@ -1,0 +1,120 @@
+#
+# Sample input file
+#   <n>: int
+#   <r>: real
+#   [a, b, c]: list
+#
+# Units: Angstrom, kcal/mol
+
+write_log <path>
+
+includedir <dir>
+include <path>
+
+rng_seed <n>             # default: current time
+
+monomer <name> {
+   file <path>
+   set torsions {
+      index [<n1>, <n2>, ...]
+      angle [<r1>, <r2<, ...]
+   }
+   head <n>
+   tail <n>
+   # OR
+   backbone [<n>, <n>, ...]  # explicit list of backbone atoms, head to tail
+}
+
+chain_type <name> {
+   monomers [<mon1>, <mon2>, ...]
+   monomer_weights [<r1>, <r2>, ...]
+   term <monomer>
+   weight <r>
+}
+
+chains <n> {
+   monomers <n>          # mean monomers/chain
+   stddev <r>            # default 0.0
+   lengths [<n>, ...]    # exact distribution
+}
+
+energy LJ {
+   params <element> {
+      epsilon <r>
+      sigma <r>
+   }
+}
+energy FENE {
+   params <element> {
+      epsilon <r>
+      sigma <r>
+      k <r>
+      R0 <r>
+   }
+}
+energy_cutoff <r>        # pair interaction cutoff range, in Angstroms
+energy_scale <r>         # default 1.0
+
+density <r>              # g/cm^3
+system [<r>, <r>, <r>]   # minimum point at origin
+
+exclude slab {
+   min [<r>, <r>, <r>]
+   max [<r>, <r>, <r>]
+}
+
+restart <dir>            # read bonds, chains, RNG state, particles from <dir>
+
+builder cbmc {
+   build <n>             # build only <n> monomers; by default, build all 
+   configs <n>           # default: 10
+   temperature <r>       # K; default: 300 
+   rotate_torsions all|none|between_monomers  # default: all 
+   torsion_probs sp3|random|custom # default: sp3
+   torsion_angle  [<r>, ...]  # custom
+   torsion_energy [<r>, ...]  # custom
+   extra_steps <n>       # default: 0
+   extra_step_size<r>    # default: 3 degrees
+   backbone_bond <r> {   # default: 1.53 Ang
+      element1 <n>       # default: 6 (C)
+      nbonds1 <n>        # default: 4
+      element2 <n>       # default: 6 (C)
+      nbonds2 <n>        # default: 4
+      order <n>          # default: 1
+   }
+   bonded_cutoff <n>     # default: 4
+   only backbone         # don't add side group atoms
+   log monomers          # log messages as monomers are added to chains
+   log energies          # log messages while MC sampling configurations
+   log status            # show status bar while building
+}
+
+write_wrapped_pdb <path> {
+   comment "comment line"
+   exclude connect       # do not write CONECT records; included by default
+}
+write_unwrapped_pdb <path> {
+   comment "comment line"
+   exclude connect       # do not write CONECT records; included by default
+}
+
+write_wrapped_xyz <path> {
+   comment "comment line"
+}
+write_unwrapped_xyz <path> {
+   comment "comment line"
+}
+
+write_chain_length <path>  # mean chain length vs. monomers
+write_chain_length_histo <path>  {
+   bin_size <r>            # default: 5 Ang
+}
+write_msid <path>          # mean square internal displacement between monomers
+write_msid_atom <path>     # mean square internal displacement between atoms
+write_torsion_histo <path>
+
+write_data4Lammps <dir>
+write_restart <dir> # data4Lammps, chains, rng
+
+write_cell <path> 
+

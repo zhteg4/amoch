@@ -1,0 +1,49 @@
+{
+    "task": {
+        "name": "LAMMPS (Dreiding)",
+        "command": "/usr/local/bin/lmp_serial -in lammps.in",
+        "echo_output": true,
+        "templates": {
+            "lammps.in": "lammps_in"
+        },
+        "inputs": {
+            "lammps_datafile": {
+                "type": "uri",
+                "value": "file://WORKDIR/polymer.data",
+                "label": "LAMMPS data file produced by data4Lammps",
+                "units": "",
+                "tags": []
+            },
+            "LJ_coeffs": {
+                "type": "uri",
+                "value": "file://WORKDIR/LJpaircoeffs.txt",
+                "label": "LJ pair coefficients produced by data4Lammps",
+                "units": "",
+                "tags": []
+            },
+            "X6_coeffs": {
+                "type": "uri",
+                "value": "file://WORKDIR/X6paircoeffs.txt",
+                "label": "Exp6 pair coefficients produced by data4Lammps",
+                "units": "",
+                "tags": []
+            }
+        },
+        "outputs": {
+            "lammps_dumpfile": {
+                "type": "uri",
+                "value": "file://WORKDIR/polymer.dump",
+                "label": "LAMMPS dump file for AMOCH restart",
+                "units": "",
+                "tags": []
+            },
+            "lammps_restart": {
+                "type": "uri",
+                "value": "file://WORKDIR/polymer.restart",
+                "label": "LAMMPS dump file for LAMMPS restart",
+                "units": "",
+                "tags": []
+            }
+        }
+    }
+}

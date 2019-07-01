@@ -1,0 +1,7 @@
+
+This version of the SFMT code is unchanged from the 1.4.1 public release,
+
+WITH THE EXCEPTION OF 
+
+the inclusion of config.h on line 5 of SFMT-params.h.
+

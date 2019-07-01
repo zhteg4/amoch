@@ -1,0 +1,23 @@
+{
+    "workflow": {
+        "echo_output": true,
+        "tasks": [
+            {
+                "taskname": "amoch",
+                "iomap": {}
+            }, 
+            {
+                "taskname": "dreiding",
+                "iomap": {}
+            },
+            {
+                "taskname": "data4Lammps",
+                "iomap": {}
+            },
+            {
+                "taskname": "lammps_dreiding",
+                "iomap": {}
+            }
+        ]
+    }
+}

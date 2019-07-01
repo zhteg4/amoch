@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# Download, compile, and install the OpenBabel library.
+# Requires git, cmake
+
+CMAKE_FLAGS=
+
+DIR=openbabel
+BUILD_DIR=${DIR}-build
+
+git clone git://github.com/openbabel/openbabel.git
+mkdir ${BUILD_DIR}
+cd ${BUILD_DIR}
+cmake ${CMAKE_FLAGS} ../${DIR}
+make
+
+CWD=`pwd`
+cd ../${DIR}
+ln -s ${CWD}/lib lib

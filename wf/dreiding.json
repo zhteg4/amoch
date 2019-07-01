@@ -1,0 +1,61 @@
+{
+    "task": {
+        "name": "DreidingTyper",
+        "command": "",
+        "echo_output": true,
+        "templates": {},
+        "inputs": {
+            "atoms_dat": {
+                "type": "uri",
+                "value": "file://WORKDIR/atoms.dat",
+                "label": "Atomic positions for input to data4Lammps",
+                "units": "",
+                "tags": []
+            },
+            "atom_type_dat_in": {
+                "type": "uri",
+                "value": "file://WORKDIR/atom_type.dat.in",
+                "label": "Atomic species for input to typer",
+                "units": "",
+                "tags": []
+            },
+            "bonds_dat": {
+                "type": "uri",
+                "value": "file://WORKDIR/bonds.dat",
+                "label": "Bond list for input to data4Lammps",
+                "units": "",
+                "tags": []
+            },
+            "bond_type_dat_in": {
+                "type": "uri",
+                "value": "file://WORKDIR/bond_type.dat.in",
+                "label": "Bond type list for input to typer",
+                "units": "",
+                "tags": []
+            }
+        },
+        "outputs": {
+            "atom_type_dat": {
+                "type": "uri",
+                "value": "file://WORKDIR/atom_type.dat",
+                "label": "Atom type list for input to data4Lammps",
+                "units": "",
+                "tags": []
+            },
+            "bond_type_dat": {
+                "type": "uri",
+                "value": "file://WORKDIR/bond_type.dat",
+                "label": "Bond type list for input to data4Lammps",
+                "units": "",
+                "tags": []
+            },
+            "forcefield_name": {
+                "type": "uri",
+                "value": "file://WORKDIR/forcefield.name",
+                "label": "Name of the forcefield for input to data4Lammps",
+                "units": "",
+                "tags": []
+            }
+        }
+    }
+}

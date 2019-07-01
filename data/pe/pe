@@ -1,0 +1,12 @@
+
+monomer pe {
+   file pe/pe.pdb
+   head 1
+   tail 4
+}
+
+chain_type pe {
+   monomers [pe]  # repeats
+   weight 1.0
+}
+
