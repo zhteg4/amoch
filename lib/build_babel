@@ -16,4 +16,5 @@ make
 
 CWD=`pwd`
 cd ../${DIR}
+# Comment off if the lib already exists
 ln -s ${CWD}/lib lib
